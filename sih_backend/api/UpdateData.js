@@ -22,8 +22,6 @@ const UpdateData = async (ws, req) => {
                 wagon_weight: CurrentData.wagon_weight
             }
     }))
-
-    console.log(CurrentData)
 }
 
 module.exports = {UpdateData}

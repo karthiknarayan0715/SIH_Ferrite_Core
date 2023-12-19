@@ -27,16 +27,12 @@ let CurrentTrain = null;
 
 const UpdateCurrentTrain = (train)=>{
     CurrentTrain = train.item
-    console.log(CurrentTrain)
 }
 const GetCurrentTrain = ()=>{
     return CurrentTrain;
 }
 
 let Connections = {}
-let all_wagons = await Wagon.findLast();
-
-let NextMeasurementId = all_wagons != null ? all_wagons.measurement_id += 1 : 0;
 let GetMeasurementId = async ()=>{
     let all_wagons = await Wagon.findLast();
     return all_wagons != null ? all_wagons.measurement_id += 1 : 0
