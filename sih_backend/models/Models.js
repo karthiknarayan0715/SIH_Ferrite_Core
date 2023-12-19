@@ -1,5 +1,5 @@
 const {mongoose} = require("mongoose");
-const {Decimal128} = require("mongodb");
+const {Decimal128, UUID} = require("mongodb");
 
 const trainSchema = new mongoose.Schema({
     name: String,
@@ -8,6 +8,7 @@ const trainSchema = new mongoose.Schema({
     min_weight: Decimal128
 });
 const wagonSchema = new mongoose.Schema({
+    measurement_id: Number,
     number: Number,
     weight: Decimal128,
     speed: Decimal128,
@@ -33,5 +34,12 @@ const GetCurrentTrain = ()=>{
 }
 
 let Connections = {}
+let all_wagons = await Wagon.findLast();
 
-module.exports = {Connections, Train, Wagon, CurrentData, UpdateCurrentTrain, GetCurrentTrain}
+let NextMeasurementId = all_wagons != null ? all_wagons.measurement_id += 1 : 0;
+let GetMeasurementId = async ()=>{
+    let all_wagons = await Wagon.findLast();
+    return all_wagons != null ? all_wagons.measurement_id += 1 : 0
+}
+
+module.exports = {Connections, Train, Wagon, CurrentData, UpdateCurrentTrain, GetCurrentTrain, GetMeasurementId}

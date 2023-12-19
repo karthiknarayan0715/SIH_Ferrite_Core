@@ -1,10 +1,11 @@
-const {CurrentData, Connections, Wagon} = require("../models/Models");
+const {CurrentData, Connections, Wagon, GetMeasurementId} = require("../models/Models");
 let GetCurrentTrain = require("../models/Models").GetCurrentTrain
 const UpdateData = async (ws, req) => {
     CurrentData.wagon_number = req.data.wagon_number;
     CurrentData.wagon_speed = req.data.wagon_speed;
     CurrentData.wagon_weight = req.data.wagon_weight;
     const new_wagon = new Wagon({
+        measurement_id: GetMeasurementId(),
         number: CurrentData.wagon_number,
         weight: CurrentData.wagon_weight,
         speed: CurrentData.wagon_speed,
@@ -15,6 +16,7 @@ const UpdateData = async (ws, req) => {
         JSON.stringify({
             type: "current_data",
             data: {
+                measurement_id: GetMeasurementId(),
                 wagon_number: CurrentData.wagon_number,
                 wagon_speed: CurrentData.wagon_speed,
                 wagon_weight: CurrentData.wagon_weight
