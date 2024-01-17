@@ -12,6 +12,7 @@ const SetTrain = require("./api/SetTrain").SetTrain
 const StartMeasurements = require("./api/StartMeasurements").StartMeasurements
 const StopMeasurements = require("./api/StopMeasurements").StopMeasurements
 const GetArchive = require("./api/GetArchive").GetArchive
+const GetMId = require("./api/GetMId").GetMId
 const uri = "mongodb://localhost:27017/SIH_Dev"
 
 mongoose.connect(uri).then(()=>{
